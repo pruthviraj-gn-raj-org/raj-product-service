@@ -9,6 +9,7 @@ import com.raj.product.service.model.Simple;
 
 @FeignClient(name="raj-zuul-service")
 @RibbonClient(name="raj-payment-service")
+
 public interface PaymentServiceProxy {
 
 	@GetMapping("/raj-payment-service/welcome/{id}/{name}/{gender}")

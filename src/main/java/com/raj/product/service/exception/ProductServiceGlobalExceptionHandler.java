@@ -23,21 +23,21 @@ public class ProductServiceGlobalExceptionHandler extends ResponseEntityExceptio
 	public ResponseEntity<Object> handleResourceNotFoundException(ResourceNotFoundException exception, WebRequest request) {
 		ExceptionsModel exceptionsModel = new ExceptionsModel(exception.getMessage(), new Date(),HttpStatus.NOT_FOUND, HttpStatus.NOT_FOUND.value(),request.getDescription(false),exception.getLocalizedMessage());
 		
-		return new ResponseEntity<Object>(exceptionsModel, HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(exceptionsModel, HttpStatus.NOT_FOUND);
 	}
 	
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(
 			MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
 		ExceptionsModel exceptionsModel = new ExceptionsModel("Validation Failed", new Date(),HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST.value(),request.getDescription(false),ex.getBindingResult().getFieldError().getDefaultMessage());
-		return new ResponseEntity<Object>(exceptionsModel, HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(exceptionsModel, HttpStatus.BAD_REQUEST);
 	}
 	
 	@ExceptionHandler(SqlOperationsException.class)
 	public ResponseEntity<Object> handleSqlOperationsException(SqlOperationsException exception, WebRequest request) {
 		ExceptionsModel exceptionsModel = new ExceptionsModel(exception.getMessage(), new Date(),HttpStatus.INTERNAL_SERVER_ERROR, HttpStatus.INTERNAL_SERVER_ERROR.value(),request.getDescription(false),exception.getLocalizedMessage());
 		
-		return new ResponseEntity<Object>(exceptionsModel, HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(exceptionsModel, HttpStatus.NOT_FOUND);
 	}
 	
 	
@@ -45,7 +45,14 @@ public class ProductServiceGlobalExceptionHandler extends ResponseEntityExceptio
 	public ResponseEntity<Object> handlePathAndRequestParamsErrors(ConstraintViolationException exception, WebRequest request) {
 		ExceptionsModel exceptionsModel = new ExceptionsModel(exception.getMessage(), new Date(),HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST.value(),request.getDescription(false),exception.getLocalizedMessage());
 		
-		return new ResponseEntity<Object>(exceptionsModel, HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(exceptionsModel, HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler(InvalidInputRequestException.class)
+	public ResponseEntity<Object> handleInvalidInputRequestException(InvalidInputRequestException exception, WebRequest request) {
+		ExceptionsModel exceptionsModel = new ExceptionsModel(exception.getMessage(), new Date(),HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST.value(),request.getDescription(false),exception.getLocalizedMessage());
+	
+		return new ResponseEntity<>(exceptionsModel, HttpStatus.BAD_REQUEST);
 	}
 	
 }

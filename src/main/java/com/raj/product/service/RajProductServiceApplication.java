@@ -7,20 +7,20 @@ import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
+//import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+//import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
 import com.raj.product.service.configs.ApplicationConfigurations;
 
 import brave.sampler.Sampler;
 
 @SpringBootApplication
-@EnableResourceServer
+//@EnableResourceServer
 @EnableJpaAuditing
 @EnableFeignClients("com.rajPharmacyProduct.*")
 @RibbonClient(name = "raj-product-service", configuration = ApplicationConfigurations.class)
 @EnableDiscoveryClient
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+//@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class RajProductServiceApplication {
 
 	public static void main(String[] args) {
